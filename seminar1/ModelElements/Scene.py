@@ -2,10 +2,11 @@
 #-*- coding: utf-8 -*-
 
 class Scene:
-    def __init__(self):
+    def __init__(self, Models, Flashes, Cameras):
         self.Id = None
-        self.Models = None
-        self.Flashes = None
+        self.Models = Models
+        self.Flashes = Flashes
+        self.Cameras = Cameras
 
     def method1(self, ):
         pass
@@ -13,3 +14,5 @@ class Scene:
     def method2(self, ):
         pass
 
+    def method3(self, ):
+        pass
