@@ -1,0 +1,79 @@
+
+Client {
+	id decimal pk increments
+	name string(50)
+	phone_number integer
+	login string(50)
+	password_hash string(50)
+}
+
+Menu_item {
+	id decimal pk increments
+	name string unique
+	ingridient_id integer >* Ingridient.id
+	price float
+}
+
+Order {
+	id decimal pk increments
+	client_id decimal *> Client.id
+	datatime datetime
+	delivery_address string
+	table_id integer > Table.id
+	status_id integer > Order_status.id
+	cost float
+}
+
+Order_status {
+	id decimal pk increments
+	payment_id integer >* Payment.id
+	status_name string unique
+	status_description text
+}
+
+Menu {
+	id decimal pk increments
+	order_id decimal > Order.id
+	product_id decimal >* Menu_item.id
+	count decimal
+}
+
+Table {
+	id decimal pk increments
+	hall_id decimal *> Hall.id
+	photo_link string
+}
+
+Hall {
+	id decimal pk increments
+	name string unique
+	photo_link string
+}
+
+Payment {
+	id integer pk increments
+	provider string pk increments
+	datetime datetime
+}
+
+Ingridient {
+	id integer pk increments
+	name string
+	description text
+	storage_place text
+}
+
+Report {
+	id integer pk increments
+	order_id integer >* Order.id
+	payment_id integer >* Payment.id
+	client_id integer >* Client.id
+	receiver_id string > Administrator.id
+}
+
+Administrator {
+	id integer pk increments
+	name string
+	permission_group_id integer
+}
+
