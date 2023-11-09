@@ -1,0 +1,48 @@
+
+Customer {
+	id decimal pk increments
+	name string(50)
+	login string(50)
+	password_hash string(50)
+}
+
+Cloud_product {
+	id decimal pk increments
+	product_type string unique
+	price decimal
+	CPU integer
+	RAM integer
+	SSD integer
+	OS string
+	IP string
+	time_start datetime
+	time_end integer
+}
+
+Order {
+	id decimal pk increments
+	customer_id decimal > Customer.id
+	IP_address string
+	datetime datetime
+}
+
+Customer_logs {
+	id decimal pk increments
+	order_id decimal > Order.id
+	set_by decimal > Customer.id
+	set_time datetime
+}
+
+Server {
+	id decimal pk increments
+	order_id integer > Order.id
+	cloud_product_id integer >* Cloud_product.id
+	name string unique
+	price decimal
+	CPU integer
+	RAM integer
+	SSD integer
+	OS string
+	IP integer
+}
+

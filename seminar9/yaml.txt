@@ -1,0 +1,666 @@
+openapi: 3.0.3
+info:
+  title: Облачный сервис - хостинг для клиентов
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /clients:
+    get:
+      summary: Метод получения списка клиентов
+      tags:
+        - Clients
+      operationId: getAllClients
+      responses:
+        "200":
+          description: Успешный ответ со спиcком клиентов
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Clients"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового клиента в список
+      tags: 
+        - Clients
+      operationId: createClient
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client" 
+      responses:
+        "200":
+          description: Успешный ответ добавления нового клиента
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /clients/{client_id}:
+    get:
+      summary: Метод получения клиента по id
+      tags:
+        - Clients
+      operationId: getClientById
+      parameters:
+        - name: client_id
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ получения клиента по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"   
+    put:
+      summary: Метод обновления данных клиента
+      tags: 
+        - Clients
+      parameters:
+        - name: client_id
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ обновления данных клиента
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление клиента по id
+      tags:
+        - Clients
+      operationId: deleteClientById
+      parameters:
+        - name: client_id
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешное удаление клиента по id
+          content:
+            adplication/json: {}
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+  /servers:
+    get:
+      summary: Метод получения списка серверов по ID
+      tags:
+        - Servers
+      operationId: getAllServers
+      responses:
+        "200":
+          description: Успешный ответ с информацией о серверах
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Server"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления данных серверного пространства
+      tags: 
+        - Servers
+      responses:
+        "200":
+          description: Успешный ответ добавления данных серверного пространства
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Server"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"        
+  /servers/{server_id}:
+    get:
+      summary: Метод получения сервера по ID
+      tags:
+        - Servers
+      operationId: getServerById
+      parameters:
+        - name: server_id
+          in: path
+          required: true
+          description: Сloud product ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ с информацией о сервере
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Server"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Метод обновления данных серверного пространства по ID
+      tags: 
+        - Servers
+      operationId: updateServerById
+      parameters:
+        - name: server_id
+          in: path
+          required: true
+          description: Server ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ обновления данных серверного пространства по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Server"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление  серверного пространства по id
+      tags:
+        - Servers
+      operationId: deleteServerById
+      parameters:
+        - name: server_id
+          in: path
+          required: true
+          description: Server ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ удаления данных серверного пространства по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Server"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /cloud_products:
+    get:
+      summary: Метод получения списка облачных сервисов
+      tags:
+        - Сloud product
+      operationId: getProductsById
+      responses:
+        "200":
+          description: Успешный ответ получения списка облачных сервисов
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"   
+    post:
+      summary: Метод добавления нового облачного сервиса
+      tags: 
+        - Сloud product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product" 
+      responses:
+        "200":
+          description: Успешный ответ добавления облачного сервиса
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"            
+  /cloud_product/{cloud_product_id}:
+    get:
+      summary: Метод получения облачного сервиса по id
+      tags:
+        - Сloud product
+      operationId: getProductById
+      parameters:
+        - name: cloud_product_id
+          in: path
+          required: true
+          description: Сloud product ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ получения облачного сервиса по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"   
+    put:
+      summary: Метод обновления данных облачного сервиса по ID
+      tags: 
+        - Сloud product
+      parameters:
+        - name: cloud_product_id
+          in: path
+          required: true
+          description: Сloud product ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ обновления данных облачного сервиса по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление облачного сервиса по id
+      tags:
+        - Сloud product
+      operationId: deleteProductById
+      parameters:
+        - name: cloud_product_id
+          in: path
+          required: true
+          description: Сloud product ID
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ удаления данных облачного сервиса по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud_product"
+        "404":
+          description: Запрашиваемые данные не найдены
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "501":
+          description: Ошибка обработки данных!
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+components:
+  schemas:
+    Client:
+      type: object
+      required:
+        - idClient
+        - name
+      properties:
+        idClient:
+          type: integer 
+          example: 1
+          description: Id клиента
+        name:
+          type: string
+          example: mike
+          description: Имя клиента
+    Clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/Client"
+    Error:
+      type: object
+      required:
+        - codeError
+        - messageError
+      properties:
+        codeError:
+          type: string
+          example: 123f456
+          description: Код ошибки
+        messageError:
+          type: string
+          example: error
+          description: Сообщение ошибки
+    Server:
+      type: object
+      required:
+        - order_id
+        - cloud_product_id
+        - name
+        - price
+        - CPU
+        - RAM
+        - SSD
+        - OS
+        - IP
+      properties:
+        Order_id:
+          type: integer
+          example: 1
+          description: ID заказа
+        Cloud_product_id:
+          type: integer
+          example: 1
+          description: ID облачного сервиса
+        Name:
+          type: string
+          example: server_no_345
+          description: Имя сервера
+        Price:
+          type: integer
+          example: 100
+          description: Стоимость аренды
+        CPU:
+          type: integer
+          example: 8
+          description: Количество ядер процессора 
+        RAM:
+          type: integer
+          example: 256
+          description: Количество оперативной памяти
+        SSD:
+          type: integer
+          example: 1024
+          description: Количество ssd памяти
+        OS:
+          type: string
+          enum:
+            - Windows
+            - Linux
+        IP:
+          type: string
+          example: 192.168.0.1
+    Cloud_product:
+      type: object
+      required:
+        - product_type
+        - price
+        - CPU
+        - RAM
+        - SSD
+        - OS
+        - IP
+        - time_start
+        - time_end
+      properties:
+        Product_type:
+          type: string
+          enum:
+            - VDS
+            - VPS
+            - hosting
+            - repository
+        Price:
+          type: integer
+          example: 100
+          description: Стоимость аренды
+        CPU:
+          type: integer
+          example: 8
+          description: Количество ядер процессора 
+        RAM:
+          type: integer
+          example: 256
+          description: Количество оперативной памяти
+        SSD:
+          type: integer
+          example: 1024
+          description: Количество ssd памяти
+        OS:
+          type: string
+          enum:
+            - Windows
+            - Linux
+        IP:
+          type: string
+          example: 192.168.0.1
+        Time_start:
+          type: string
+          example: 10.10.2023 12:12:25
+        Time_end:
+          type: string
+          example: 10.10.2023 12:12:25
